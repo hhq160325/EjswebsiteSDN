@@ -1,0 +1,13 @@
+<form action="/products/add" method="POST" enctype="multipart/form-data">
+    <input type="text" name="name" placeholder="Tên sản phẩm" required>
+    <input type="number" name="price" placeholder="Giá sản phẩm" required>
+    <!-- <input type="text" name="categoryId" placeholder="ID danh mục" required> -->
+    <select name="categoryId" required>
+        <option value="">Chọn danh mục</option>
+        <% categories.forEach(category => { %>
+            <option value="<%= category._id %>"><%= category.name %></option>
+        <% }) %>
+    </select>
+    <input type="file" name="image">
+    <button type="submit">Thêm</button>
+</form>

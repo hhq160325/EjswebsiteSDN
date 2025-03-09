@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Category</title>
+</head>
+<body>
+    <h1>Edit Category</h1>
+    <a href="/category">Back to List</a>
+    <form action="/category/edit/<%= category._id %>" method="POST">
+        <label>Name:</label>
+        <input type="text" name="name" value="<%= category.name %>" required>
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>
