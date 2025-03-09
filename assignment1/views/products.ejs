@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
@@ -16,11 +16,7 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <!-- <th>Tên</th>
-                    <th>Giá</th>
-                    <th>Danh mục</th>
-                    <th>Hình ảnh</th>
-                    <th>Hành động</th> -->
+            
             <% if (user.role === 'admin') { %>
             <th>Tên</th>
             <th>Giá</th>
@@ -38,7 +34,7 @@
               <%= product.price ? product.price.toLocaleString('vi-VN') + ' VND'
               : 'Chưa có giá' %>
             </td>
-            <!-- <td><%= product.categoryId %></td> -->
+           
             <td>
               <% if (product.image) { %>
               <img src="<%= product.image %>" alt="Product Image" width="100" />
@@ -46,28 +42,10 @@
               <span>Không có ảnh</span>
               <% } %>
             </td>
-            <!-- <td>
-              <a
-                href="/products/edit/<%= product._id %>"
-                class="btn btn-warning btn-sm"
-                >Sửa</a
-              >
-              <a
-                href="/products/delete/<%= product._id %>"
-                class="btn btn-danger btn-sm"
-                onclick="return confirm('Bạn có chắc muốn xóa?')"
-                >Xóa</a
-              >
-            </td> -->
+            
             <% if (user.role === 'admin') { %>
             <td><%= product.categoryId %></td>
-            <!-- <td>
-                  <% if (product.image) { %>
-                  <img src="<%= product.image %>" alt="Product Image" width="100" />
-                  <% } else { %>
-                  <span>Không có ảnh</span>
-                  <% } %>
-                </td> -->
+          
             <td>
               <a
                 href="/products/edit/<%= product._id %>"
@@ -92,4 +70,59 @@
       <a href="/dashboard" class="btn btn-primary">Back to Dashboard</a>
     </div>
   </body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Management</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <h2 class="mb-4">Product List</h2>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <% if (user.role === 'admin') { %>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Category</th>
+            <th>Actions</th>
+          <% } %>
+        </tr>
+      </thead>
+      <tbody>
+        <% products.forEach(product => { %>
+          <tr>
+            <td><%= product.name %></td>
+            <td><%= product.price ? product.price.toLocaleString('vi-VN') + ' VND' : 'No Price' %></td>
+            <td>
+              <% if (product.image) { %>
+                <img src="<%= product.image %>" alt="Product Image" width="100" />
+              <% } else { %>
+                <span>No Image</span>
+              <% } %>
+            </td>
+            <td><%= product.categoryId %></td>
+            <% if (user.role === 'admin') { %>
+              <td>
+                <a href="/products/edit/<%= product._id %>" class="btn btn-warning btn-sm">Edit</a>
+                <a href="/products/delete/<%= product._id %>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+              </td>
+            <% } %>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    <% if (user.role === 'admin') { %>
+      <a href="/products/add" class="btn btn-primary">Add Product</a>
+    <% } %>
+    <a href="/dashboard" class="btn btn-primary">Back to Dashboard</a>
+  </div>
+</body>
 </html>
